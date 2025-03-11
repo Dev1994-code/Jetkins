@@ -7,12 +7,12 @@ pipeline {
     environment {
         DOCKER_IMAGE = "dev1994/jetkins:${env.BUILD_NUMBER}"
         RENDER_API_TOKEN = rnd_b0WnbqgczJB7tJPUDoxEeeuvb3Gm
-        RENDER_SERVICE_ID = 'your-service-id' // e.g., srv-xxxx
+        RENDER_SERVICE_ID = 'srv-cv7u460gph6c7397s1o0' // e.g., srv-xxxx
     }
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/Dev1994-code/Jetkins.git', branch: 'master'
+                git url: 'https://github.com/Dev1994-code/Jetkins.git', branch: 'main'
             }
         }
         stage('Build JAR') {
