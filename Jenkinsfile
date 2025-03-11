@@ -5,7 +5,7 @@ pipeline {
         jdk 'JDK17'
     }
     environment {
-        DOCKER_IMAGE = "yourusername/my-spring-app:${env.BUILD_NUMBER}"
+        DOCKER_IMAGE = "dev1994/jetkins:${env.BUILD_NUMBER}"
         RENDER_API_TOKEN = rnd_b0WnbqgczJB7tJPUDoxEeeuvb3Gm
         RENDER_SERVICE_ID = 'your-service-id' // e.g., srv-xxxx
     }
@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Push to Docker Hub') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USER', passwordVariable: 'DOCKER_PASS')]) {
+                withCredentials([usernamePassword(credentialsId: '1', usernameVariable: 'dcode1994', passwordVariable: 'loveone')]) {
                     sh '''
                     echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin
                     docker push $DOCKER_IMAGE
@@ -41,10 +41,10 @@ pipeline {
             steps {
                 sh '''
                 curl -X POST \
-                    -H "Authorization: Bearer ${RENDER_API_TOKEN}" \
+                    -H "Authorization: Bearer $rnd_b0WnbqgczJB7tJPUDoxEeeuvb3Gm" \
                     -H "Content-Type: application/json" \
-                    -d '{"serviceId": "'${RENDER_SERVICE_ID}'", "clearCache": true}' \
-                    https://api.render.com/v1/services/${RENDER_SERVICE_ID}/deploys
+                    -d '{"serviceId": "srv-cv7u460gph6c7397s1o0", "clearCache": true}' \
+                    https://api.render.com/v1/services/srv-cv7u460gph6c7397s1o0/deploys
                 '''
             }
         }
